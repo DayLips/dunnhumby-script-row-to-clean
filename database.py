@@ -18,7 +18,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 class Base(DeclarativeBase):
     ...
 
-# Подключение моделей
+from models import CleanTransactionData, CleanCampaignDesc, CleanCampaignTable, CleanCoupon, CleanCouponRedempt, CleanHHDemographic, CleanProduct
 
 def get_db():
     db = SessionLocal()
