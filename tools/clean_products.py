@@ -31,7 +31,7 @@ def parse_size(raw: str):
         unit = 'L'
     return numeric, unit
 
-def clean_products(engine):
+def clean_product(engine):
     df = pd.read_sql("SELECT * FROM raw.products", engine)
     df = df[df['manufacturer'].notna() & (df['manufacturer'] > 0)]
     df = df.drop_duplicates(subset=['product_id'], keep='first')

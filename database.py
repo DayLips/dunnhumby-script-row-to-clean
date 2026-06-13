@@ -7,25 +7,16 @@ load_dotenv()
 
 engine = create_engine(
     os.getenv("DATABASE_URL"),
-    connect_args={'options': '-csearch_path=clear'},
+    connect_args={'options': '-csearch_path=clean'},
     pool_size=10,
     max_overflow=20,
     pool_pre_ping=True
 )
 
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
 class Base(DeclarativeBase):
     ...
 
 from models import CleanTransactionData, CleanCampaignDesc, CleanCampaignTable, CleanCoupon, CleanCouponRedempt, CleanHHDemographic, CleanProduct
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 def init_db():
     Base.metadata.create_all(bind=engine)
